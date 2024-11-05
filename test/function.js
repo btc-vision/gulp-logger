@@ -1,40 +1,40 @@
-(function() {
-    'use strict';
+import { createRequire } from 'module';
+import { runFunctionTest } from './common.js';
 
-    var test = require('colored-tape'),
-        runFunctionTest = require('./common.js').runFunctionTest;
+const require = createRequire(import.meta.url);
 
-    test('function:default', function(t) {
-        runFunctionTest(t, {});
+const test = require('colored-tape');
+
+test('function:default', (t) => {
+    runFunctionTest(t, {});
+});
+
+test('function:relative', (t) => {
+    runFunctionTest(t, {
+        display: 'rel',
     });
+});
 
-    test('function:relative', function(t) {
-        runFunctionTest(t, {
-            display: 'rel'
-        });
+test('function:absolute', (t) => {
+    runFunctionTest(t, {
+        display: 'abs',
     });
+});
 
-    test('function:absolute', function(t) {
-        runFunctionTest(t, {
-            display: 'abs'
-        });
+test('function:filename', (t) => {
+    runFunctionTest(t, {
+        display: 'name',
     });
+});
 
-    test('function:filename', function(t) {
-        runFunctionTest(t, {
-            display: 'name'
-        });
+test('function:before', (t) => {
+    runFunctionTest(t, {
+        before: 'functionBeforeTest!',
     });
+});
 
-    test('function:before', function(t) {
-        runFunctionTest(t, {
-            before: 'functionBeforeTest!'
-        });
+test('function:after', (t) => {
+    runFunctionTest(t, {
+        after: 'functionAfterTest!',
     });
-
-    test('function:after', function(t) {
-        runFunctionTest(t, {
-            after: 'functionAfterTest!'
-        });
-    });
-}());
+});

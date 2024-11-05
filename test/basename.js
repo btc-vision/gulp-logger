@@ -1,12 +1,12 @@
-(function() {
-    'use strict';
+import { createRequire } from 'module';
+import { runOptionsTest } from './common.js';
 
-    var test = require('colored-tape'),
-        runOptionsTest = require('./common.js').runOptionsTest;
+const require = createRequire(import.meta.url);
 
-    test('basename', function(t) {
-        runOptionsTest(t, {
-            basename: 'same-name-wow'
-        });
+const test = require('colored-tape');
+
+test('basename', (t) => {
+    runOptionsTest(t, {
+        basename: 'same-name-wow',
     });
-}());
+});

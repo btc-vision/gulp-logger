@@ -1,31 +1,30 @@
-(function() {
-    'use strict';
+import gulp from 'gulp';
+import logger from '../index.js';
 
-    var gulp = require('gulp'),
-        logger = require('../index.js'),
-        FILES_TO_STREAM = 'test/files-to-stream/**/*.js';
+const FILES_TO_STREAM = 'test/files-to-stream/**/*.js';
 
-    module.exports = {
-        runOptionsTest: function(t, config) {
-            t.plan(1);
+export const runOptionsTest = (t, config) => {
+    t.plan(1);
 
-            gulp.src(FILES_TO_STREAM)
-                .pipe(logger(config))
-                .on('data', function() {}).on('end', function() {
-                    t.equals(true, true);
-                });
-        },
+    gulp.src(FILES_TO_STREAM)
+        .pipe(logger(config))
+        .on('data', () => {
+        })
+        .on('end', () => {
+            t.equals(true, true);
+        });
+};
 
-        runFunctionTest: function(t, config) {
-            t.plan(1);
+export const runFunctionTest = (t, config) => {
+    t.plan(1);
 
-            gulp.src(FILES_TO_STREAM)
-                .pipe(logger(function(filePath) {
-                    console.log(filePath);
-                }, config))
-                .on('data', function() {}).on('end', function() {
-                    t.equals(true, true);
-                });
-        }
-    };
-}());
+    gulp.src(FILES_TO_STREAM)
+        .pipe(logger((filePath) => {
+            console.log(filePath);
+        }, config))
+        .on('data', () => {
+        })
+        .on('end', () => {
+            t.equals(true, true);
+        });
+};

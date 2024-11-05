@@ -1,12 +1,12 @@
-(function() {
-    'use strict';
+import { createRequire } from 'module';
+import { runOptionsTest } from './common.js';
 
-    var test = require('colored-tape'),
-        runOptionsTest = require('./common.js').runOptionsTest;
+const require = createRequire(import.meta.url);
 
-    test('prefix', function(t) {
-        runOptionsTest(t, {
-            prefix: 'combined-'
-        });
+const test = require('colored-tape');
+
+test('prefix', (t) => {
+    runOptionsTest(t, {
+        prefix: 'combined-',
     });
-}());
+});

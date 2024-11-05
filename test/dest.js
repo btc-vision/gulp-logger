@@ -1,26 +1,26 @@
-(function() {
-    'use strict';
+import { createRequire } from 'module';
+import { runOptionsTest } from './common.js';
 
-    var test = require('colored-tape'),
-        runOptionsTest = require('./common.js').runOptionsTest;
+const require = createRequire(import.meta.url);
 
-    test('dest:relative', function(t) {
-        runOptionsTest(t, {
-            dest: 'new/location'
-        });
+const test = require('colored-tape');
+
+test('dest:relative', (t) => {
+    runOptionsTest(t, {
+        dest: 'new/location',
     });
+});
 
-    test('dest:absolute', function(t) {
-        runOptionsTest(t, {
-            display: 'abs',
-            dest: 'new/location'
-        });
+test('dest:absolute', (t) => {
+    runOptionsTest(t, {
+        display: 'abs',
+        dest: 'new/location',
     });
+});
 
-    test('dest:filename', function(t) {
-        runOptionsTest(t, {
-            display: 'name',
-            dest: 'new/location'
-        });
+test('dest:filename', (t) => {
+    runOptionsTest(t, {
+        display: 'name',
+        dest: 'new/location',
     });
-}());
+});
