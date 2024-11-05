@@ -1,25 +1,26 @@
-gulp-logger
-===========
+# gulp-logger-new
 
-Logger plugin for [gulp](http://gulpjs.com/) for logging stream stages, transformations and progress.
+The es6 version of [gulp-logger](https://www.npmjs.com/package/gulp-logger). Compatible with gulp v5.
 
-# Install
+A logger plugin for [gulp](http://gulpjs.com/) that logs stream stages, transformations, and progress.
+
+## Installation
 
 ```bash
-$ npm install gulp-logger --save
+$ npm install gulp-logger-new --save
 ```
 
-# Basic Usage
+## Basic Usage
 
-Something like this:
+Below is an example of using `gulp-logger-new` alongside `gulp-gzip` to log stages in a Gulp task, using ES6 syntax.
 
-```js
-var gulp = require('gulp'),
-    gzip = require('gulp-gzip'),
-    logger = require('gulp-logger');
+```javascript
+import gulp from 'gulp';
+import gzip from 'gulp-gzip';
+import logger from 'gulp-logger-new';
 
-gulp.task('gzip', function () {
-    gulp.src('**/*.js')
+gulp.task('gzip', () => {
+    return gulp.src('**/*.js')
         .pipe(logger({
             before: 'Starting Gzip...',
             after: 'Gzipping complete!',
@@ -30,69 +31,64 @@ gulp.task('gzip', function () {
 });
 ```
 
-And a folder structure like this:
+### Example Folder Structure
+
+Given a folder structure like this:
 
 ```text
 files-to-stream/
-    |- baz/
-    |   |- file.js
-    |   `- wat.js
-    |
-    |- foo.js
-    |- bar.js
-    `- derp.js
+    ├── baz/
+    │   ├── file.js
+    │   └── wat.js
+    ├── foo.js
+    ├── bar.js
+    └── derp.js
 ```
 
-Would give you this:
+The logger output would look like this:
 
-![Imgur](http://i.imgur.com/NvKNwAY.png)
+![Logger Output](http://i.imgur.com/NvKNwAY.png)
 
 ## Options
 
-#### `before` *String*
+Customize logging behavior with the following options:
 
-The message you want to show before the chunks are shown.
+- ### `before` *String*
+  Message displayed before the processing starts.
 
-#### `after` *String*
+- ### `after` *String*
+  Message displayed after the processing ends.
 
-The message you want to show after the chunks are shown.
+- ### `beforeEach` *String*
+  Message displayed before each file in the stream.
 
-#### `beforeEach` *String*
+- ### `afterEach` *String*
+  Message displayed after each file in the stream.
 
-The message you want to show before each chunk.
+- ### `prefix` *String*
+  Adds a constant prefix to each filename.
 
-#### `afterEach` *String*
+- ### `suffix` *String*
+  Adds a constant suffix to each filename.
 
-The message you want to show after each chunk.
+- ### `extname` *String*
+  Sets a new extension for each filename.
 
-#### `prefix` *String*
+- ### `basename` *String*
+  Sets a new basename for each filename.
 
-A constant value to prefix to each filename in the chunk.
+- ### `dest` *String*
+  Sets a constant destination path for each file in the log.
 
-#### `suffix` *String*
+- ### `colors` *Boolean*
+  Enables or disables colored output in the log.
 
-A constant value to suffix to each filename in the chunk.
+- ### `display` *String (default: `'rel'`)*
+  Specifies how to display the file path for each chunk. Options are:
+    - `'rel'`: Relative path
+    - `'abs'`: Absolute path
+    - `'name'`: Filename only
 
-#### `extname` *String*
+## Additional Features
 
-A constant value to set as the extension for each filename in the chunk.
-
-#### `basename` *String*
-
-A constant value to set as the basename for each filename in the chunk.
-
-#### `dest` *String*
-
-A constant value to set as the dest for each filename in the chunk.
-
-#### `colors` *Boolean*
-
-Whether or not to turn off colors on the output.
-
-#### `display='rel'` *String*
-
-How you want the path of the chunk to show.
-
-- `'rel'`: Relative path
-- `'abs'`: Absolute path
-- `'name'`: Filename
+- **`showChange`**: When set to `true`, displays path changes (such as renaming or destination changes) for each file.
